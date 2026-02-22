@@ -1,10 +1,14 @@
 import pickle
 
+global cave
+global completed_starter
+global money
+global caves
 with open('savefile.pkl', 'rb') as file:
-    cave = ""
     loaded_data = pickle.load(file)
-completed_starter, cave, money = loaded_data
+completed_starter, cave, money, caves = loaded_data
 global gain
+
 
 def goatchurch():
     print("Goatchurch it is!")
@@ -70,29 +74,59 @@ def goatchurch():
                                         print("You make your way out of the cave.")
                                         answer = input("continue to next cave?")
                                         if answer.lower() == "yes":
-                                            print("You are paid for each cave that is a success!")
-                                            gain = 200
+                                            if "goatchurch" in caves:
+                                                gain = 100
+                                            else:
+                                                print("You are paid for each cave that is a success!")
+                                                gain = 200
+                                                caves.append("goatchurch")
                                             increaseMoney(gain)
-                                            global cave
-                                            global completed_starter
                                             completed_starter = False
                                             cave = "swildons"
                                             with open('savefile.pkl', 'wb') as file:
-                                                pickle.dump([completed_starter, cave, money], file)
+                                                pickle.dump([completed_starter, cave, money, caves], file)
                                             swildons()
                                         else:
-                                            print("You are paid for each cave that is a success!")
-                                            gain = 200
+                                            if "goatchurch" in caves:
+                                                gain = 100
+                                            else:
+                                                print("You are paid for each cave that is a success!")
+                                                gain = 200
+                                                caves.append("goatchurch")
                                             increaseMoney(gain)
-                                            global cave
-                                            global completed_starter
                                             completed_starter = False
                                             cave = "swildons"
                                             with open('savefile.pkl', 'wb') as file:
-                                                pickle.dump([completed_starter, cave, money], file)
+                                                pickle.dump([completed_starter, cave, money, caves], file)
                                     else:
                                         print("You take a few minutes to shuffle up, but it is far quicker than climbing!")
                                         print("You make your way out of the cave.")
+                                        answer = input("continue to next cave?")
+                                        if answer.lower() == "yes":
+                                            if "goatchurch" in caves:
+                                                gain = 100
+                                            else:
+                                                print("You are paid for each cave that is a success!")
+                                                gain = 200
+                                                caves.append("goatchurch")
+                                            increaseMoney(gain)
+                                            completed_starter = False
+                                            cave = "swildons"
+                                            with open('savefile.pkl', 'wb') as file:
+                                                pickle.dump([completed_starter, cave, money, caves], file)
+                                            swildons()
+                                        else:
+                                            if "goatchurch" in caves:
+                                                gain = 100
+                                            else:
+                                                print("You are paid for each cave that is a success!")
+                                                gain = 200
+                                                caves.append("goatchurch")
+                                            increaseMoney(gain)
+                                            completed_starter = False
+                                            cave = "swildons"
+                                            with open('savefile.pkl', 'wb') as file:
+                                                pickle.dump([completed_starter, cave, money, caves], file)
 
 
                             else:
@@ -117,6 +151,8 @@ def goatchurch():
 
     else:
         print("I'm sorry, but that feature is under development.")
+        with open('savefile.pkl', 'wb') as file:
+            pickle.dump([completed_starter, cave, money, caves], file)
 
 def swildons():
     print("coming soon")
@@ -164,8 +200,12 @@ def bigMenu():
         menu()
     else:
         print("That feature does not exist. Please request it if you wish.")
+        with open('savefile.pkl', 'wb') as file:
+            pickle.dump([completed_starter, cave, money, caves], file)
 def training():
     print("This feature requires another programme. Please return later.")
+    with open('savefile.pkl', 'wb') as file:
+        pickle.dump([completed_starter, cave, money, caves], file)
 
 def increaseMoney(gain):
     global money
@@ -174,6 +214,10 @@ def increaseMoney(gain):
     money += gain
     print("Your balance has changed by "+ str(money - money2) + "$")
     print("Your new balance is "+ str(money) + "$")
+
+
+print("Please remember that this game does not autosave, except at the end of each cave. If you quit before then, your progress WILL NOT be saved.")
+print("The only other time it saves is when you are forced to quit the game with your actions.")
 if cave == "goatchurch":
     menu1()
 elif cave == "swildons":
