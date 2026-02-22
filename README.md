@@ -1,5 +1,2 @@
 # CavingGame
-## Session 1 - 47 mins
-Start to caving game, starting demo, works ok now
-## Session 2 - 25 mins
-Added first puzzle, which completes demo.
+The biggest text game I have ever made! Containing many caves, a save function, and the ability to gain new equipment with positive boosts!
