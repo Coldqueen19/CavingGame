@@ -20,11 +20,11 @@ To maintain the challenge and "rogue-lite" feel of the game, the save system use
 *   **Deployment:** Compiled to standalone `.exe` using PyInstaller for a seamless user experience.
 
 ## 🎮 How to Play
-1.  **Launch:** Run the `CaveCrawler.exe`.
+1.  **Launch:** Run the `Runner.exe`.
 2.  **Navigate:** Use the text prompts to move between locations and interact with the environment.
 3.  **Loot:** Keep an eye out for equipment! These items are essential for surviving deeper, more difficult caves.
 4.  **Save:** Reaching a new cave entrance automatically logs your progress.
-5.  **Restarting:** If you want to delete your save file and start over, simply run `reset.py`.
+5.  **Restarting:** If you want to delete your save file and start over, simply run `reset.exe`.
 
 ## 🚀 Installation & Setup
 1.  Download the latest **Release** from the sidebar.
