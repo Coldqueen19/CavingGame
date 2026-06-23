@@ -44,7 +44,7 @@ def goatchurch():
         print("You are now in the showcave.")
         print("In every area of the cave you visit there will be a short minigame.")
         print()
-        print("Turn headtorch on. Here are commands. Order them.")
+        print("Turn headtorch on. Here are some commands. Order them.")
         print()
         print("1. Adjust tilt")
         print("2. Turn knob until light turns on")
