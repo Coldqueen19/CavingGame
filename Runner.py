@@ -1,40 +1,27 @@
-<<<<<<< HEAD
 import os
 import pickle
 import time
 
 base = os.path.dirname(__file__)
 save_path = os.path.join(base, "savefile.pkl")
-=======
-import pickle
->>>>>>> 77e71127b746a776be08b3cc40f68ec013d66036
 
 global cave
 global completed_starter
 global money
 global caves
-<<<<<<< HEAD
 global starttext
 with open(save_path, 'rb') as file:
     loaded_data = pickle.load(file)
 completed_starter, cave, money, caves, starttext = loaded_data
-=======
-with open('savefile.pkl', 'rb') as file:
-    loaded_data = pickle.load(file)
-completed_starter, cave, money, caves = loaded_data
->>>>>>> 77e71127b746a776be08b3cc40f68ec013d66036
 global gain
 
 
 def goatchurch():
-<<<<<<< HEAD
     global cave
     global completed_starter
     global money
     global caves
     global starttext
-=======
->>>>>>> 77e71127b746a776be08b3cc40f68ec013d66036
     print("Goatchurch it is!")
     global answer
     if input("Would you like to go in the old or new entrance?").lower() == "old":
@@ -86,7 +73,6 @@ def goatchurch():
                                     "You travel through the cave to get to the drainpipe and enter it. However, there is someone in it!")
                                 answer = input("Do you go backwards or force the other person backwards?")
                                 if answer.lower() == "backwards":
-<<<<<<< HEAD
                                     print("It is always good to be courteous. As a thank you for your trouble, the other caver gives you some money.")
                                     gain = 50
                                     increaseMoney(gain)
@@ -153,12 +139,6 @@ def goatchurch():
                                             cave = "swildons"
                                             with open('savefile.pkl', 'wb') as file:
                                                 pickle.dump([completed_starter, cave, money, caves, starttext], file)
-=======
-                                    print(
-                                        "It is always good to be courteous. As a thank you for your trouble, the other caver gives you some money.")
-                                    gain = 50
-                                    increaseMoney(gain)
->>>>>>> 77e71127b746a776be08b3cc40f68ec013d66036
                                 else:
                                     print(
                                         "The man is very angry at having to force his group to back up and demands compensation.")
@@ -183,11 +163,7 @@ def goatchurch():
                                             completed_starter = False
                                             cave = "swildons"
                                             with open('savefile.pkl', 'wb') as file:
-<<<<<<< HEAD
                                                 pickle.dump([completed_starter, cave, money, caves, starttext], file)
-=======
-                                                pickle.dump([completed_starter, cave, money, caves], file)
->>>>>>> 77e71127b746a776be08b3cc40f68ec013d66036
                                             swildons()
                                         else:
                                             if "goatchurch" in caves:
@@ -200,12 +176,8 @@ def goatchurch():
                                             completed_starter = False
                                             cave = "swildons"
                                             with open('savefile.pkl', 'wb') as file:
-<<<<<<< HEAD
                                                 pickle.dump([completed_starter, cave, money, caves, starttext], file)
                                             bigMenu()
-=======
-                                                pickle.dump([completed_starter, cave, money, caves], file)
->>>>>>> 77e71127b746a776be08b3cc40f68ec013d66036
                                     else:
                                         print(
                                             "You take a few minutes to shuffle up, but it is far quicker than climbing!")
@@ -222,11 +194,7 @@ def goatchurch():
                                             completed_starter = False
                                             cave = "swildons"
                                             with open('savefile.pkl', 'wb') as file:
-<<<<<<< HEAD
                                                 pickle.dump([completed_starter, cave, money, caves, starttext], file)
-=======
-                                                pickle.dump([completed_starter, cave, money, caves], file)
->>>>>>> 77e71127b746a776be08b3cc40f68ec013d66036
                                             swildons()
                                         else:
                                             if "goatchurch" in caves:
@@ -239,12 +207,8 @@ def goatchurch():
                                             completed_starter = False
                                             cave = "swildons"
                                             with open('savefile.pkl', 'wb') as file:
-<<<<<<< HEAD
                                                 pickle.dump([completed_starter, cave, money, caves, starttext], file)
                                                 bigMenu()
-=======
-                                                pickle.dump([completed_starter, cave, money, caves], file)
->>>>>>> 77e71127b746a776be08b3cc40f68ec013d66036
 
 
                             else:
@@ -254,7 +218,6 @@ def goatchurch():
                             print(
                                 "This rash decision marks the end of your caving career. You are eventually rescued but must go through re-training before going near another cave.")
                             print()
-<<<<<<< HEAD
                             answer = input("Go for retraining now?")
                             starttext = "MANDATORY RETRAINING: BAD DESCISION MAKAING"
                             cave = "training"
@@ -269,9 +232,6 @@ def goatchurch():
                                 with open('savefile.pkl', 'wb') as file:
                                     pickle.dump([completed_starter, cave, money, caves, starttext], file)
 
-=======
-                            training()
->>>>>>> 77e71127b746a776be08b3cc40f68ec013d66036
                     else:
                         print("You are forced to return to the entrance.")
                         bigMenu()
@@ -288,7 +248,6 @@ def goatchurch():
     else:
         print("I'm sorry, but that feature is under development.")
         with open('savefile.pkl', 'wb') as file:
-<<<<<<< HEAD
             pickle.dump([completed_starter, cave, money, caves, starttext], file)
 
 
@@ -308,13 +267,6 @@ def swildons():
         print("Your game will save here")
     with open('savefile.pkl', 'wb') as file:
         pickle.dump([completed_starter, cave, money, caves], file)
-=======
-            pickle.dump([completed_starter, cave, money, caves], file)
-
-
-def swildons():
-    print("coming soon")
->>>>>>> 77e71127b746a776be08b3cc40f68ec013d66036
 
 
 def menu1():
@@ -326,7 +278,6 @@ def menu1():
         goatchurch()
     else:
         print()
-<<<<<<< HEAD
         print("I'm sorry, but that cave is either locked or under development.")
 
 
@@ -336,12 +287,6 @@ def menu2():
     global money
     global caves
     global starttext
-=======
-        print("I'm sorry, but that feature is under development.")
-
-
-def menu2():
->>>>>>> 77e71127b746a776be08b3cc40f68ec013d66036
     print()
     print("Here are the list of caves you can enter:")
     print("Goatchurch Cavern")
@@ -353,7 +298,6 @@ def menu2():
         swildons()
     else:
         print()
-<<<<<<< HEAD
         print("I'm sorry, but that cave is either locked or under development.")
         with open('savefile.pkl', 'wb') as file:
             pickle.dump([completed_starter, cave, money, caves, starttext], file)
@@ -365,12 +309,6 @@ def bigMenu():
     global money
     global caves
     global starttext
-=======
-        print("I'm sorry, but that feature is under development.")
-
-
-def bigMenu():
->>>>>>> 77e71127b746a776be08b3cc40f68ec013d66036
     print()
     print()
     print("You can do 4 actions currently:")
@@ -387,12 +325,11 @@ def bigMenu():
             menu1()
         elif cave == "swildons":
             menu2()
-<<<<<<< HEAD
     elif response.lower() == "save" or response.lower() == "save and quit":
         with open('savefile.pkl', 'wb') as file:
             pickle.dump([completed_starter, cave, money, caves, starttext], file)
     elif response.lower() == "restart":
-        response == input("Are you sure? You will definitely lose all of your progress! This action physically overrides the save file and if a copy is not made you will be unable to recoer your previous game/s")
+        response == input("Are you sure? You will lose all of your progress! This action physically overrides the save file and if a copy is not made you will be unable to recoer your previous game/s")
         if response.lower() == "yes":
             reset()
         else:
@@ -461,18 +398,6 @@ def training():
     cave = "goatchurch"
     with open('savefile.pkl', 'wb') as file:
         pickle.dump([completed_starter, cave, money, caves, starttext], file)
-=======
-    else:
-        print("That feature does not exist. Please request it if you wish.")
-        with open('savefile.pkl', 'wb') as file:
-            pickle.dump([completed_starter, cave, money, caves], file)
-
-
-def training():
-    print("This feature requires another programme. Please return later.")
-    with open('savefile.pkl', 'wb') as file:
-        pickle.dump([completed_starter, cave, money, caves], file)
->>>>>>> 77e71127b746a776be08b3cc40f68ec013d66036
 
 
 def increaseMoney(gain):
@@ -483,7 +408,6 @@ def increaseMoney(gain):
     print("Your balance has changed by " + str(money - money2) + "$")
     print("Your new balance is " + str(money) + "$")
 
-<<<<<<< HEAD
 def reset():
     global cave
     global completed_starter
@@ -514,13 +438,3 @@ elif cave == "swildons":
     menu2()
 elif cave == "training":
     training()
-=======
-
-print(
-    "Please remember that this game does not autosave, except at the end of each cave. If you quit before then, your progress WILL NOT be saved.")
-print("The only other time it saves is when you are forced to quit the game with your actions.")
-if cave == "goatchurch":
-    menu1()
-elif cave == "swildons":
-    menu2()
->>>>>>> 77e71127b746a776be08b3cc40f68ec013d66036
