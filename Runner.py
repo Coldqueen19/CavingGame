@@ -44,7 +44,7 @@ def goatchurch():
         print("You are now in the showcave.")
         print("In every area of the cave you visit there will be a short minigame.")
         print()
-        print("Turn headtorch on. Here are commands. Order them.")
+        print("Turn headtorch on. Here are some commands. Order them.")
         print()
         print("1. Adjust tilt")
         print("2. Turn knob until light turns on")
@@ -329,7 +329,7 @@ def bigMenu():
         with open('savefile.pkl', 'wb') as file:
             pickle.dump([completed_starter, cave, money, caves, starttext], file)
     elif response.lower() == "restart":
-        response == input("Are you sure? You will lose all of your progress! This action physically overrides the save file and if a copy is not made you will be unable to recoer your previous game/s")
+        response == input("Are you sure? You will definitely lose all of your progress! This action physically overrides the save file and if a copy is not made you will be unable to recoer your previous game/s")
         if response.lower() == "yes":
             reset()
         else:
