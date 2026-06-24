@@ -1,8 +1,9 @@
-import pickle
+import json
 completed_starter = False
 cave = "training"
 money = 0
 caves = []
 starttext = "MANDATORY ORIGINAL TRAINING"
-with open('savefile.pkl', 'wb') as file:
-    pickle.dump([completed_starter, cave, money, caves, starttext], file)
+data = { "completed_starter": completed_starter, "area": cave, "money": money, "caves": caves, "starttext": starttext}
+with open('savefile.json', 'w') as file:
+    json.dump(data, file)
