@@ -1,0 +1,3 @@
+USER INSTRUCTIONS PLEASE READ
+
+Copy the contents of this folder to your desktop(Cave Crawler, savefile.json and the folder _internal). If you do not do this and attempt to run from a subfolder in your home(excluding desktop, downloads, documents and applications and similar) the game will not run! It is also essential to keep all files together or the game will break as it will be unable to find the savefile. If you wish to keep previous versions of the game or old savefiles please place these in a subfolder in a different folder than the one you are using, especially for old versions of the game as if you try to run from a subfolder of the root folder your modern savefile is in, the game might crash!
