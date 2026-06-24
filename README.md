@@ -28,3 +28,7 @@ To maintain the challenge and "rogue-lite" feel of the game, the save system use
 ## 🚀 Installation & Setup
 1.  Download the latest **Release** from the sidebar.
 2.  Extract the ZIP file and follow the instructions in the "INSTRUCTIONS-IMPORTANT.txt" file.
+
+
+## NOTE
+The old variety ofsavefile is no longer supported foor the current version. For those who still wish to play with the legacy versions of this game a legacy folder has been added. All of the source code for past versions will be there, as well as a complete game. You can also find previous versions on the releases page, however V1.0.0 th game WILL NOT WORK. Instead use the ones provided in the legacy folder.
