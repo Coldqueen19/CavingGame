@@ -7,7 +7,6 @@ Welcome to a deep, atmospheric journey through a massive network of interconnect
 *   **Expansive Exploration:** Navigate a sprawling world of numerous unique caves, each filled with mystery and danger.
 *   **Dynamic Equipment System:** Find and equip gear that provides **permanent positive boosts** to your character's capabilities.
 *   **Persistent Progress:** Features a built-in save system that tracks your journey through the depths.
-*   **One-Click Reset:** Includes a dedicated `reset.py` utility for players who wish to wipe their data and start a fresh adventure.
 
 ## 💾 Save Mechanics (How it Works)
 To maintain the challenge and "rogue-lite" feel of the game, the save system uses a **Checkpoint Mechanic**:
