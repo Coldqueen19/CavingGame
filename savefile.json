@@ -1,1 +1,1 @@
-{"completed_starter": false, "area": "training", "money": 0, "caves": [], "starttext": "MANDATORY ORIGINAL TRAINING"}
+{"completed_starter": false, "area": "training", "money": 100, "caves": ["training"], "cave_names": ["Training"], "cave_functions": ["training"], "starttext": ""}
