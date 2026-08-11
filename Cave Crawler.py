@@ -44,7 +44,11 @@ def goatchurch():
     print("\033[2J\033[3J\033[H\033[0m")
     print("Goatchurch it is!")
     global answer
-    if input("Would you like to go in the old or new entrance?").lower() == "old":
+    answer = input("Would you like to go in the old or new entrance?")
+    while answer.lower() != "old" and answer.lower() != "new":
+        print("Answer not recognised")
+        answer = input("Please try again: ")
+    if answer.lower() == "old":
         print("Follow me!")
         print("""
         ________________________________________________________
@@ -82,16 +86,25 @@ def goatchurch():
                         print("You can now continue on.")
                         print("You turn down towards a slope and you must work out how to slide down.")
                         answer = input("Go down feet first or head first?")
+                        while answer.lower() != "feet first" and answer.lower() != "head first":
+                            print("Answer not recognised")
+                            answer = input("Please try again: ")
                         if answer.lower() == "feet first":
                             print(
                                 "You make it down safely, but must now figure out how to continue through the small hole to advance through the cave.")
                             answer = input("Commando crawl or normal crawl? ")
+                            while answer.lower() != "commando" and answer.lower() != "commando crawl" and answer.lower() != "normal" and answer.lower() != "normal crawl":
+                                print("Answer not recognised")
+                                answer = input("Please try again: ")
                             if answer.lower() == "commando" or answer.lower() == "commando crawl":
                                 print(
                                     "You have made it through the hole. The next choice will not be until much later.")
                                 print(
                                     "You travel through the cave to get to the drainpipe and enter it. However, there is someone in it!")
-                                answer = input("Do you go backwards or force the other person backwards?")
+                                answer = input("Do you go backwards or do you go forwards and force the other person backwards?")
+                                while answer.lower() != "forwards" and answer.lower() != "backwards":
+                                    print("Answer not recognised")
+                                    answer = input("Please try again: ")
                                 if answer.lower() == "backwards":
                                     print("It is always good to be courteous. As a thank you for your trouble, the other caver gives you some money.")
                                     gain = 50
