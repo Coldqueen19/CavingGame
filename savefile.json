@@ -1,1 +1,1 @@
-{"completed_starter": false, "area": "training", "money": 100, "caves": ["training"], "cave_names": ["Training"], "cave_functions": ["training"], "starttext": ""}
+{"completed_starter": false, "area": "swildons", "money": 248, "caves": ["training", "goatchurch", "goatchurch cavern"], "cave_names": ["Training", "Goatchurch Cavern"], "cave_functions": ["training", "goatchurch", "goatchurch"], "starttext": ""}
