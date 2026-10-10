@@ -20,7 +20,8 @@ If you wish to start fresh, simply choose the reset option in the main menu(this
 
 ## Installation & Setup
 1.  Download the latest **Release** from the sidebar.
-2.  Put the **Executable** in applications or wherever you want and double click.
+2.  Unzip the file.
+3.  Put the **Executable** in applications or wherever you want and double click.
 
 
 ## NOTE
