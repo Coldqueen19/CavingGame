@@ -20,8 +20,8 @@ If you wish to start fresh, simply choose the reset option in the main menu(this
 
 ## Installation & Setup
 1.  Download the latest **Release** from the sidebar.
-2.  Extract the ZIP file and follow the instructions in the "INSTRUCTIONS-IMPORTANT.txt" file.
+2.  Put the **Executable** in applications or wherever you want and double click.
 
 
 ## NOTE
-The old variety ofsavefile is no longer supported foor the current version. For those who still wish to play with the legacy versions of this game a legacy folder has been added. All of the source code for past versions will be there, as well as a complete game. You can also find previous versions on the releases page, however V1.0.0 the game WILL NOT WORK. Instead use the ones provided in the legacy folder.
+The old variety of savefile is no longer supported foor the current version. For those who still wish to play with the legacy versions of this game a legacy folder has been added. All of the source code for past versions will be there, as well as a complete game. You can also find previous versions on the releases page, however V1.0.0 the game WILL NOT WORK. Instead use the ones provided in the legacy folder. Python being installed is a must and a bit of fiddling may also be required
