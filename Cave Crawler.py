@@ -1,6 +1,10 @@
-import pickle
 import json
 import time
+import os
+
+target_dir = os.path.expanduser(os.path.join("~", "Library", "Application Support", "CaveCrawler"))
+os.makedirs(target_dir, exist_ok=True)
+os.chdir(target_dir)
 
 print("\033[2J\033[3J\033[H\033[0m\n\033[?25l")
 
@@ -13,23 +17,39 @@ global gain
 global cave_functions
 global cave_functions_str
 global cave_names
-with open("savefile.json", 'r') as file:
-    loaded_data = json.load(file)
-completed_starter = loaded_data.get("completed_starter", False)
-cave = loaded_data.get("area", "training")
-money = loaded_data.get("money", 100)
-caves = loaded_data.get("caves", [])
-cave_names = loaded_data.get("cave_names", [])
-cave_functions_str = loaded_data.get("cave_functions", [])
-starttext = loaded_data.get("starttext", "MANDATORY ORIGINAL TRAINING")
+global inventory
+global loaded_data
+global shop
+global prices
+global shop_ref
+shop_stock = ["Rope"]
+prices = [20]
+shop_ref = ["rope"]
+loaded_data = {}
+with open("savefile.json", 'r+') as file:
+    try:
+        loaded_data = json.load(file)
+    except json.JSONDecodeError:
+        file.write("{}")
+    completed_starter = loaded_data.get("completed_starter", False)
+    cave = loaded_data.get("area", "training")
+    money = loaded_data.get("money", 100)
+    caves = loaded_data.get("caves", [])
+    cave_names = loaded_data.get("cave_names", [])
+    cave_functions_str = loaded_data.get("cave_functions", [])
+    inventory = loaded_data.get("inventory", [])
+    starttext = loaded_data.get("starttext", "MANDATORY ORIGINAL TRAINING")
 for string in cave_functions_str:
     if string in globals():
         func = globals()[string]
         cave_functions.append(func)
+
+
 def save():
-    data = { "completed_starter": completed_starter, "area": cave, "money": money, "caves": caves, "cave_names": cave_names, "cave_functions": cave_functions_str, "starttext": starttext}
+    data = { "completed_starter": completed_starter, "area": cave, "money": money, "caves": caves, "cave_names": cave_names, "cave_functions": cave_functions_str, "starttext": starttext, "inventory": inventory}
     with open('savefile.json', 'w') as file:
         json.dump(data, file)
+
 
 def goatchurch():
     global cave
@@ -270,9 +290,28 @@ def goatchurch():
             bigMenu()
 
     else:
-        print("I'm sorry, but that feature is under development.")
-        save()
-        time.sleep(3)
+        dev = input("I'm sorry, but that feature is under development. Press enter to return to main menu.")
+        if dev != "hack club is amazing!":
+            save()
+            bigMenu()
+        print("New entrance it is.")
+        print("There is a short drop here.")
+        if "rope" in inventory:
+            answer = input("Rig a rope?")
+            if answer.lower() != "yes":
+                print("It is too dangerous. You have to return.")
+                time.sleep(2)
+                save()
+                bigMenu()
+            else:
+                pass
+        else:
+            print("It is too dangerous. You have to return.")
+            time.sleep(2)
+            save()
+            bigMenu()
+
+
 
 
 def swildons():
@@ -346,33 +385,31 @@ def bigMenu():
     global cave_functions_str
     global cave_names
     print("\033[2J\033[3J\033[H\033[0m")
+    print("MAIN MENU\n")
     print("You can do 4 actions currently:")
     print("Go caving")
-    print("!UNDER DEVELOPMENT! Get better gear(Shop)")
+    print("Get better gear(Shop)")
     print("Save and Quit")
     print("Restart")
     global response
     response = input("What do you want to do?")
+    while response.lower() != "getbettergear" and response.lower() != "get better gear" and response.lower() != "shop" and response.lower() != "gocaving" and response.lower() != "go caving" and response.lower() != "save" and response.lower() != "save and quit" and response.lower() != "quit" and response.lower() != "restart":
+        response = input("Answer not recognised. Please try again ensuring there are no leading and trailing spaces and that everyting is pelled correctly: ")
     if response.lower() == "getbettergear" or response.lower() == "get better gear" or response.lower() == "shop":
-        print("I'm sorry, but that feature is under development.")
+        shop()
     elif response.lower() == "gocaving" or response.lower() == "go caving":
         if cave == "goatchurch":
             menu1()
         elif cave == "swildons":
             menu2()
-    elif response.lower() == "save" or response.lower() == "save and quit":
-        with open('savefile.pkl', 'wb') as file:
-            pickle.dump([completed_starter, cave, money, caves, starttext], file)
+    elif response.lower() == "save" or response.lower() == "save and quit" or response.lower() == "quit":
+        save()
     elif response.lower() == "restart":
-        response == input("Are you sure? You will definitely lose all of your progress! This action physically overrides the save file and if a copy is not made you will be unable to recoer your previous game/s")
-        if response.lower() == "yes":
+        response = input("Are you sure? You will definitely lose all of your progress! This action physically overrides the save file and if a copy is not made you will be unable to recoer your previous game/s [y/N] ~")
+        if response.lower() == "y":
             reset()
         else:
             save()
-    else:
-        print("That feature does not exist. Please request it if you wish.")
-        with open('savefile.pkl', 'wb') as file:
-            pickle.dump([completed_starter, cave, money, caves, starttext], file)
 
 
 def training():
@@ -486,12 +523,36 @@ def reset():
     global money
     global caves
     global starttext
+    global inventory
     completed_starter = False
     cave = "training"
     money = 0
     caves = []
     starttext = "MANDATORY ORIGINAL TRAINING"
+    inventory = []
+    print("Game Reset")
+    time.sleep(3)
     save()
+
+def shop():
+    global inventory
+    print("\033[2J\033[3J\033[H\033[0m")
+    print("SHOP")
+    for item in shop_stock:
+        print(item)
+        print(f"{prices[shop_stock.index(item)]}$")
+    answer = input("Would you like to buy something?(y/N)")
+    while answer.lower() == "y":
+        answer = input("What would you like to buy?")
+        while answer.lower() not in shop_ref:
+            answer = input("Answer not recognised. please try again: ")
+        index = shop_ref.index(answer.lower())
+        item = shop_ref[index]
+        inventory.append(item)
+        increaseMoney(-(prices[index]))
+        answer = input("Would you like to buy something else?(y/N)")
+    bigMenu()
+
 
 t = 0
 while t < (len(cave_names)+2):
@@ -559,8 +620,8 @@ print('''    &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
  &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
   &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&  
     &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&    ''')
-time.sleep(5)
-print("Welcome To Cave Crawler")
+time.sleep(3)
+print("\n Welcome To Cave Crawler")
 time.sleep(5)
 print("\033[2J\033[3J\033[H\033[0m")
 print("\033[31m\033[5mPlease remember that this game does not autosave, except at the end of each cave. If you quit before then, your progress WILL NOT be saved.")
@@ -574,12 +635,10 @@ print("\033[2J\033[3J\033[H\033[0m")
 if starttext != "":
     print(starttext)
     time.sleep(1)
-if cave == "goatchurch":
-    menu1()
-elif cave == "swildons":
-    menu2()
-elif cave == "training":
+if cave == "training":
     training()
+else:
+    bigMenu()
 
 time.sleep(2)
 print("\033[?25h\033[2J\033[H\033[0m")
