@@ -2,6 +2,8 @@ import json
 import time
 import os
 
+#data = open("congrats.pdf", "rb").read()
+
 target_dir = os.path.expanduser(os.path.join("~", "Library", "Application Support", "CaveCrawler"))
 os.makedirs(target_dir, exist_ok=True)
 os.chdir(target_dir)
@@ -23,6 +25,8 @@ global loaded_data
 global shop
 global prices
 global shop_ref
+global injuries
+global answer
 open("savefile.json", "a").close()
 shop_stock = ["Rope"]
 prices = [20]
@@ -43,16 +47,132 @@ with open("savefile.json", 'r+') as file:
     cave_answers = loaded_data.get("cave_answers", [])
     inventory = loaded_data.get("inventory", [])
     starttext = loaded_data.get("starttext", "MANDATORY ORIGINAL TRAINING")
-for string in cave_functions_str:
-    if string in globals():
-        func = globals()[string]
-        cave_functions.append(func)
+    injuries = loaded_data.get("injuries", 0)
+
 
 
 def save():
-    data = { "completed_starter": completed_starter, "area": cave, "money": money, "caves": caves, "cave_names": cave_names, "cave_functions": cave_functions_str, "starttext": starttext, "inventory": inventory, "cave_answers": cave_answers}
+    data = { "completed_starter": completed_starter, "area": cave, "money": money, "caves": caves, "cave_names": cave_names, "cave_functions": cave_functions_str, "starttext": starttext, "inventory": inventory, "cave_answers": cave_answers, "injuries": injuries}
     with open('savefile.json', 'w') as file:
         json.dump(data, file)
+
+
+def boss():
+    print("So, you've finally the nerve to find me eh? Well I can tell you this won't be easy for you! \nI'll give you one chance to surrender and i'll give you 404 and 2 injuries")
+    answer = input("Surrender? [Y/n] % ")
+    if answer.lower() == "y":
+        print("You have some nerve, challenging the developer. Ok, I gave you your chance so here's how it works: \nThere are 3 stages to this  boss fight: \n1. 10 questions \n2. Typing out a passage of text without any mistakes. \n3. A final multiple choice question with 10 possible answers. \nFail any of them and you lose all your money and gain 10 injuries. \nBeat all of them and get 300$. Have fun!")
+        answer = input("What is the first cave in this game?")
+        if answer.lower() == "goatchurch cavern":
+            answer = input("What was the incorrect answer for the question in training?")
+            if answer.lower() == "head first":
+                answer = input("What os was this game originally designed for?")
+                if answer.lower() == "mac" or answer.lower() == "macintosh" or answer.lower() == "macos" or answer.lower() == "macintosh os":
+                    answer = input("How many caves have you unlocked?")
+                    if int(answer) == len(cave_names):
+                        answer = input("What is the second cave in this game?")
+                        if answer.lower() == "swildon's hole":
+                            answer = input("What is the of this game?")
+                            if answer.lower() == "cave crawler":
+                                answer = input("Do you have rope in your inventory?")
+                                if (answer.lower() == "yes" and "rope" in inventory) or (answer.lower() == "no" and "rope" not in inventory):
+                                    answer = input("What is the fourth option in the main menu?")
+                                    if answer.lower() == "retire":
+                                        answer = input("What is the first option in the main menu?")
+                                        if answer.lower() == "go caving":
+                                            answer = input("Where, in real life is the first cave?")
+                                            if answer.lower() == "the mendips" or answer.lower() == "mendips":
+                                                print("Wow! You mananged to beat the first round! but here's the second.")
+                                                para = "fgdhjgfbsajhfgbdsjgfewshfgsdhjfgshjnfshjfvdshfgdhjkgfhsjagfhajdsfghdjkfghdsjfgdsjhkgfahjkgfdjhkgfdshjakfgdhjkgashjkgahjskgdaskjhadshjkfdghjsdfahjkfdgfhdjkgfhjkdfgjfkdhagfhjdkfghjdskfgdjhsafgjdhfgjkhfsafhgjdkasfghdjaksfdhsgjakfsajghkdasjkhfsdagjksagjksajkajkgshfgjhafkfeggewyjhbzufhvsauyfvstghadtshgdftysahdfytahfdaythfaytjhfasghdfvsahgdfasghjdvasydgxcagshdcsghcxasghftywsctysahvxsatyadfasgfxsatydvstyaxfvaytvxytsavxysahvxysghaxvsghxvsghacxvhsgadxvghsaxvhgsx"
+                                                print(f"Copy this text with nomore than 3 errors: {para} %")
+                                                start = time.time()
+                                                answer = input("% ")
+                                                elapsed = time.time() - start
+                                                if len(answer) > 50 and elapsed < 20:
+                                                    print("NO copy and paste. That's a fail.")
+                                                    injuries += 10
+                                                    increaseMoney(-money)
+                                                else:
+                                                    mistakes = 0
+                                                    for trgt, usr in zip(para, answer):
+                                                        if trgt != usr:
+                                                            mistakes += 1
+                                                    if mistakes >= 3:
+                                                        print("3+ Mistakes. Dissapointing.")
+                                                        injuries += 10
+                                                        increaseMoney(-money)
+                                                    else:
+                                                        print("Ok, I see something in you but can you answer this question?")
+                                                        answer = input("What is Schildkröte in English?")
+                                                        if answer.lower() == "tortoise":
+                                                            download_dir = os.path.expanduser(os.path.join("~","Downloads"))
+                                                            os.chdir(download_dir)
+                                                            #open("CONGRATULATIONS.pdf", "wb").write(data)
+                                                            os.chdir(target_dir)
+
+                                            else:
+                                                print("I warned you!")
+                                                injuries += 10
+                                                increaseMoney(-money)
+                                        else:
+                                            print("I warned you!")
+                                            injuries += 10
+                                            increaseMoney(-money)
+                                    else:
+                                        print("I warned you!")
+                                        injuries += 10
+                                        increaseMoney(-money)
+                                else:
+                                    print("I warned you!")
+                                    injuries += 10
+                                    increaseMoney(-money)
+                            else:
+                                print("I warned you!")
+                                injuries += 10
+                                increaseMoney(-money)
+                        else:
+                            print("I warned you!")
+                            injuries += 10
+                            increaseMoney(-money)
+                    else:
+                        print("I warned you!")
+                        injuries += 10
+                        increaseMoney(-money)
+                else:
+                    print("I warned you!")
+                    injuries += 10
+                    increaseMoney(-money)
+            else:
+                print("I warned you!")
+                injuries += 10
+                increaseMoney(-money)
+        else:
+            print("I warned you!")
+            injuries += 10
+            increaseMoney(-money)
+    else:
+        injuries += 2
+        increaseMoney(50)
+
+
+def doctor():
+    global injuries
+    print(f"You have {injuries} injuries.")
+    if money >= 20:
+        increaseMoney(-20)
+        injuries -= 1
+    elif money <= 20 and injuries < 5:
+        print("You do not have enough money to afford treatment.")
+    else:
+        print("You condition is so critical that you must retire.")
+        retire()
+    print(f"You now have {injuries} injuries.")
+
+
+def retire():
+    print("Well done noble adventurer. I hope you enjoyed your adventure. THe game will now reset.")
+    time.sleep(2)
+    reset()
 
 
 def goatchurch():
@@ -65,9 +185,25 @@ def goatchurch():
     global cave_functions
     global cave_functions_str
     global cave_names
+    global injuries
+    if injuries >= 5:
+        answer = input("You have more than 5 injuries. Visit the doctor for 20$ or retire? Retiring resets the game.")
+        while answer.lower() != "doctor" and answer.lower() != " visit doctor" and answer.lower() != "the doctor" and answer.lower() != "visit the doctor" and answer.lower() != "retire":
+            answer = input("Answer not recognised. Please ensure everything is correctly spelt and that there are no leading or trailing spaces: ")
+        if answer.lower() == "doctor" or answer.lower() == " visit doctor" or answer.lower() == "the doctor" or answer.lower() == "visit the doctor":
+            doctor()
+        else:
+            retire()
+    while injuries >= 5:
+        answer = input("You still have more than 5 injuries. Visit the doctor again for 20$ or retire? Retiring resets the game.")
+        while answer.lower() != "doctor" and answer.lower() != " visit doctor" and answer.lower() != "the doctor" and answer.lower() != "visit the doctor" and answer.lower() != "retire":
+            answer = input("Answer not recognised. Please ensure everything is correctly spelt and that there are no leading or trailing spaces: ")
+        if answer.lower() == "doctor" or answer.lower() == " visit doctor" or answer.lower() == "the doctor" or answer.lower() == "visit the doctor":
+            doctor()
+        else:
+            retire()
     print("\033[2J\033[3J\033[H\033[0m")
     print("Goatchurch it is!")
-    global answer
     answer = input("Would you like to go in the old or new entrance?")
     while answer.lower() != "old" and answer.lower() != "new":
         print("Answer not recognised")
@@ -303,15 +439,36 @@ def goatchurch():
         if "rope" in inventory:
             answer = input("Rig a rope?")
             if answer.lower() != "yes":
-                print("It is too dangerous. You have to return.")
+                print("It hurts like hell. You have to be rushed out! You gained 2 injuries.")
+                injuries += 2
+                answer = input("Spend 20$ to visit the doctor and heal one injury [Y/n]?")
+                if answer.lower() == "n":
+                    print(f"You have {injuries} injuries. If you gain more than 5 injuries you will either have to visit the doctor or retire.")
+                else:
+                    doctor()
                 time.sleep(2)
                 save()
                 bigMenu()
             else:
-                pass
+                print("You encounter a slide like structure.")
+                answer = input("Slide down on your front or on your back? ")
+                while answer.lower() != "front" and answer.lower() != "back":
+                    answer = input("I can't seem to recognise that answer. Please check for typos and leading or trailing spaces.")
+                if answer.lower() == "front":
+                    print("It is a little painful but you should be ok?")
+                    injuries += 1
+                    answer = input("Spend 20$ to visit the doctor [Y/n]?")
+                    if answer.lower() == "n":
+                        print(f"You have {injuries} injuries. If you gain more than 5 injuries you will either have to visit the doctor or retire.")
+                    else:
+                        doctor()
+                else:
+                    print("You make it down with no injury.")
+                bigMenu()
+                
         else:
-            print("It is too dangerous. You have to return.")
-            time.sleep(2)
+            print("It is too dangerous without a rope. You have to return.")
+            time.sleep(4)
             save()
             bigMenu()
 
@@ -340,44 +497,6 @@ def swildons():
     save()
 
 
-def menu1():
-    print("\033[2J\033[3J\033[H\033[0m")
-    print("Here are the list of caves you can enter:")
-    print("Goatchurch Cavern")
-    ans = input("Where would you like to go?")
-    if ans.lower() == "goatchurch" or ans.lower() == "goatchurch cavern":
-        goatchurch()
-    else:
-        print()
-        print("I'm sorry, but that cave is either locked or under development.")
-        save()
-
-
-def menu2():
-    global cave
-    global completed_starter
-    global money
-    global caves
-    global starttext
-    global gain
-    global cave_functions
-    global cave_functions_str
-    global cave_names
-    print("\033[2J\033[3J\033[H\033[0m")
-    print("Here are the list of caves you can enter:")
-    print("Goatchurch Cavern")
-    print("Swildons Hole")
-    ans = input("Where would you like to go?")
-    if ans.lower() == "goatchurch" or ans.lower() == "goatchurch cavern":
-        goatchurch()
-    if ans.lower() == "swildons" or ans.lower() == "swildons hole":
-        swildons()
-    else:
-        print()
-        print("I'm sorry, but that cave is either locked or under development.")
-        save()
-
-
 def bigMenu():
     global cave
     global completed_starter
@@ -394,27 +513,19 @@ def bigMenu():
     print("Go caving")
     print("Get better gear(Shop)")
     print("Save and Quit")
-    print("Restart")
+    print("Retire")
     global response
     response = input("What do you want to do?")
-    while response.lower() != "getbettergear" and response.lower() != "get better gear" and response.lower() != "shop" and response.lower() != "gocaving" and response.lower() != "go caving" and response.lower() != "save" and response.lower() != "save and quit" and response.lower() != "quit" and response.lower() != "restart":
+    while response.lower() != "getbettergear" and response.lower() != "get better gear" and response.lower() != "shop" and response.lower() != "gocaving" and response.lower() != "go caving" and response.lower() != "save" and response.lower() != "save and quit" and response.lower() != "quit" and response.lower() != "retire":
         response = input("Answer not recognised. Please try again ensuring there are no leading and trailing spaces and that everyting is pelled correctly: ")
     if response.lower() == "getbettergear" or response.lower() == "get better gear" or response.lower() == "shop":
         shop()
     elif response.lower() == "gocaving" or response.lower() == "go caving":
         caving()
-        if cave == "goatchurch":
-            menu1()
-        elif cave == "swildons":
-            menu2()
     elif response.lower() == "save" or response.lower() == "save and quit" or response.lower() == "quit":
         save()
-    elif response.lower() == "restart":
-        response = input("Are you sure? You will definitely lose all of your progress! This action physically overrides the save file and if a copy is not made you will be unable to recoer your previous game/s [y/N] ~")
-        if response.lower() == "y":
-            reset()
-        else:
-            save()
+    elif response.lower() == "retire":
+        retire()
 
 
 def training():
@@ -533,6 +644,7 @@ def reset():
     global cave_functions_str
     global starttext
     global inventory
+    global injuries
     completed_starter = False
     cave = "training"
     money = 0
@@ -541,6 +653,7 @@ def reset():
     inventory = []
     cave_names = []
     cave_functions_str = []
+    injuries = 0
     print("Game Reset")
     time.sleep(3)
     save()
@@ -576,6 +689,11 @@ def caving():
         index = caves.index(answer.lower())
         cave_functions[index]()
 
+
+for string in cave_functions_str:
+    if string in globals():
+        func = globals()[string]
+        cave_functions.append(func)
 
 t = 0
 while t < (len(cave_names)+2):
