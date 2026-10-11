@@ -17,15 +17,18 @@ global gain
 global cave_functions
 global cave_functions_str
 global cave_names
+global cave_answers
 global inventory
 global loaded_data
 global shop
 global prices
 global shop_ref
+open("savefile.json", "a").close()
 shop_stock = ["Rope"]
 prices = [20]
 shop_ref = ["rope"]
 loaded_data = {}
+cave_functions = []
 with open("savefile.json", 'r+') as file:
     try:
         loaded_data = json.load(file)
@@ -37,6 +40,7 @@ with open("savefile.json", 'r+') as file:
     caves = loaded_data.get("caves", [])
     cave_names = loaded_data.get("cave_names", [])
     cave_functions_str = loaded_data.get("cave_functions", [])
+    cave_answers = loaded_data.get("cave_answers", [])
     inventory = loaded_data.get("inventory", [])
     starttext = loaded_data.get("starttext", "MANDATORY ORIGINAL TRAINING")
 for string in cave_functions_str:
@@ -46,7 +50,7 @@ for string in cave_functions_str:
 
 
 def save():
-    data = { "completed_starter": completed_starter, "area": cave, "money": money, "caves": caves, "cave_names": cave_names, "cave_functions": cave_functions_str, "starttext": starttext, "inventory": inventory}
+    data = { "completed_starter": completed_starter, "area": cave, "money": money, "caves": caves, "cave_names": cave_names, "cave_functions": cave_functions_str, "starttext": starttext, "inventory": inventory, "cave_answers": cave_answers}
     with open('savefile.json', 'w') as file:
         json.dump(data, file)
 
@@ -398,6 +402,7 @@ def bigMenu():
     if response.lower() == "getbettergear" or response.lower() == "get better gear" or response.lower() == "shop":
         shop()
     elif response.lower() == "gocaving" or response.lower() == "go caving":
+        caving()
         if cave == "goatchurch":
             menu1()
         elif cave == "swildons":
@@ -500,10 +505,12 @@ def training():
     cave_names.append("Goatchurch Cavern")
     cave_functions_str.append("goatchurch")
     cave_functions_str.append("goatchurch")
+    cave_functions.append(goatchurch)
+    cave_functions.append(goatchurch)
     save()
     answer = input("Continue to first cave? Typing 'yes' will continue, typing anything else will save and quit however you will be able to compleye the first cave as soon as you open game again.")
     if answer.lower() == "yes":
-        goatchurch()
+        bigMenu()
     else:
         save()
 
@@ -522,6 +529,8 @@ def reset():
     global completed_starter
     global money
     global caves
+    global cave_names
+    global cave_functions_str
     global starttext
     global inventory
     completed_starter = False
@@ -530,6 +539,8 @@ def reset():
     caves = []
     starttext = "MANDATORY ORIGINAL TRAINING"
     inventory = []
+    cave_names = []
+    cave_functions_str = []
     print("Game Reset")
     time.sleep(3)
     save()
@@ -552,6 +563,18 @@ def shop():
         increaseMoney(-(prices[index]))
         answer = input("Would you like to buy something else?(y/N)")
     bigMenu()
+
+
+def caving():
+    print("Here are the list of caves you can enter:")
+    for item in cave_names:
+        print(item)
+    answer = input("Where would you like to go?")
+    while answer.lower() not in caves:
+        answer = input("You may have misspelt the name or hae not unlocked that cave yet. Please try again: ")
+    if answer.lower() in caves:
+        index = caves.index(answer.lower())
+        cave_functions[index]()
 
 
 t = 0
