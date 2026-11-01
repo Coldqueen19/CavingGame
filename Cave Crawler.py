@@ -56,6 +56,125 @@ def save():
     with open('savefile.json', 'w') as file:
         json.dump(data, file)
 
+
+def boss():
+    print("So, you've finally the nerve to find me eh? Well I can tell you this won't be easy for you! \nI'll give you one chance to surrender and i'll give you 404 and 2 injuries")
+    answer = input("Surrender? [Y/n] % ")
+    if answer.lower() == "y":
+        print("You have some nerve, challenging the developer. Ok, I gave you your chance so here's how it works: \nThere are 3 stages to this  boss fight: \n1. 10 questions \n2. Typing out a passage of text without any mistakes. \n3. A final multiple choice question with 10 possible answers. \nFail any of them and you lose all your money and gain 10 injuries. \nBeat all of them and get 300$. Have fun!")
+        answer = input("What is the first cave in this game?")
+        if answer.lower() == "goatchurch cavern":
+            answer = input("What was the incorrect answer for the question in training?")
+            if answer.lower() == "head first":
+                answer = input("What os was this game originally designed for?")
+                if answer.lower() == "mac" or answer.lower() == "macintosh" or answer.lower() == "macos" or answer.lower() == "macintosh os":
+                    answer = input("How many caves have you unlocked?")
+                    if int(answer) == len(cave_names):
+                        answer = input("What is the second cave in this game?")
+                        if answer.lower() == "swildon's hole":
+                            answer = input("What is the of this game?")
+                            if answer.lower() == "cave crawler":
+                                answer = input("Do you have rope in your inventory?")
+                                if (answer.lower() == "yes" and "rope" in inventory) or (answer.lower() == "no" and "rope" not in inventory):
+                                    answer = input("What is the fourth option in the main menu?")
+                                    if answer.lower() == "retire":
+                                        answer = input("What is the first option in the main menu?")
+                                        if answer.lower() == "go caving":
+                                            answer = input("Where, in real life is the first cave?")
+                                            if answer.lower() == "the mendips" or answer.lower() == "mendips":
+                                                print("Wow! You mananged to beat the first round! but here's the second.")
+                                                para = "fgdhjgfbsajhfgbdsjgfewshfgsdhjfgshjnfshjfvdshfgdhjkgfhsjagfhajdsfghdjkfghdsjfgdsjhkgfahjkgfdjhkgfdshjakfgdhjkgashjkgahjskgdaskjhadshjkfdghjsdfahjkfdgfhdjkgfhjkdfgjfkdhagfhjdkfghjdskfgdjhsafgjdhfgjkhfsafhgjdkasfghdjaksfdhsgjakfsajghkdasjkhfsdagjksagjksajkajkgshfgjhafkfeggewyjhbzufhvsauyfvstghadtshgdftysahdfytahfdaythfaytjhfasghdfvsahgdfasghjdvasydgxcagshdcsghcxasghftywsctysahvxsatyadfasgfxsatydvstyaxfvaytvxytsavxysahvxysghaxvsghxvsghacxvhsgadxvghsaxvhgsx"
+                                                print(f"Copy this text with nomore than 3 errors: {para} %")
+                                                start = time.time()
+                                                answer = input("% ")
+                                                elapsed = time.time() - start
+                                                if len(answer) > 50 and elapsed < 20:
+                                                    print("NO copy and paste. That's a fail.")
+                                                    injuries += 10
+                                                    increaseMoney(-money)
+                                                else:
+                                                    mistakes = 0
+                                                    for trgt, usr in zip(para, answer):
+                                                        if trgt != usr:
+                                                            mistakes += 1
+                                                    if mistakes >= 3:
+                                                        print("3+ Mistakes. Dissapointing.")
+                                                        injuries += 10
+                                                        increaseMoney(-money)
+                                                    else:
+                                                        print("Ok, I see something in you but can you answer this question?")
+                                                        answer = input("What is Schildkröte in English?")
+                                                        if answer.lower() == "tortoise":
+                                                            download_dir = os.path.expanduser(os.path.join("~","Downloads"))
+                                                            os.chdir(download_dir)
+                                                            #open("CONGRATULATIONS.pdf", "wb").write(data)
+                                                            os.chdir(target_dir)
+
+                                            else:
+                                                print("I warned you!")
+                                                injuries += 10
+                                                increaseMoney(-money)
+                                        else:
+                                            print("I warned you!")
+                                            injuries += 10
+                                            increaseMoney(-money)
+                                    else:
+                                        print("I warned you!")
+                                        injuries += 10
+                                        increaseMoney(-money)
+                                else:
+                                    print("I warned you!")
+                                    injuries += 10
+                                    increaseMoney(-money)
+                            else:
+                                print("I warned you!")
+                                injuries += 10
+                                increaseMoney(-money)
+                        else:
+                            print("I warned you!")
+                            injuries += 10
+                            increaseMoney(-money)
+                    else:
+                        print("I warned you!")
+                        injuries += 10
+                        increaseMoney(-money)
+                else:
+                    print("I warned you!")
+                    injuries += 10
+                    increaseMoney(-money)
+            else:
+                print("I warned you!")
+                injuries += 10
+                increaseMoney(-money)
+        else:
+            print("I warned you!")
+            injuries += 10
+            increaseMoney(-money)
+    else:
+        injuries += 2
+        increaseMoney(50)
+
+
+def doctor():
+    global injuries
+    print(f"You have {injuries} injuries.")
+    if money >= 20:
+        increaseMoney(-20)
+        injuries -= 1
+    elif money <= 20 and injuries < 5:
+        print("You do not have enough money to afford treatment.")
+    else:
+        print("You condition is so critical that you must retire.")
+        retire()
+    print(f"You now have {injuries} injuries.")
+
+
+def retire():
+    print("Well done noble adventurer. I hope you enjoyed your adventure. THe game will now reset.")
+    time.sleep(2)
+    reset()
+
+
 def goatchurch():
     global cave
     global completed_starter
@@ -117,20 +236,12 @@ def goatchurch():
         print("4. Test headtorch batteries")
         print("Give the number.")
         answer = input("First is?")
-        while answer.lower() != "1" and answer.lower() != "2" and answer.lower() != "3" and answer.lower() != "4":
-            answer = input("Enter a numerical answer: ")
         if answer.lower() == "3" or answer.lower() == "4":
             answer = input("Next is?")
-            while answer.lower() != "1" and answer.lower() != "2" and answer.lower() != "3" and answer.lower() != "4":
-                answer = input("Enter a numerical answer: ")
             if answer.lower() == "3" or answer.lower() == "4":
                 answer = input("Next is?")
-                while answer.lower() != "1" and answer.lower() != "2" and answer.lower() != "3" and answer.lower() != "4":
-                    answer = input("Enter a numerical answer: ")
                 if answer.lower() == "2":
                     answer = input("Next is?")
-                    while answer.lower() != "1" and answer.lower() != "2" and answer.lower() != "3" and answer.lower() != "4":
-                        answer = input("Enter a numerical answer: ")
                     if answer.lower() == "1":
                         print("You can now continue on.")
                         print("You turn down towards a slope and you must work out how to slide down.")
@@ -139,7 +250,8 @@ def goatchurch():
                             print("Answer not recognised")
                             answer = input("Please try again: ")
                         if answer.lower() == "feet first":
-                            print("You make it down safely, but must now figure out how to continue through the small hole to advance through the cave.")
+                            print(
+                                "You make it down safely, but must now figure out how to continue through the small hole to advance through the cave.")
                             answer = input("Commando crawl or normal crawl? ")
                             while answer.lower() != "commando" and answer.lower() != "commando crawl" and answer.lower() != "normal" and answer.lower() != "normal crawl":
                                 print("Answer not recognised")
@@ -155,21 +267,16 @@ def goatchurch():
                                     answer = input("Please try again: ")
                                 if answer.lower() == "backwards":
                                     print("It is always good to be courteous. As a thank you for your trouble, the other caver gives you some money.")
-                                    increaseMoney(50)
+                                    gain = 50
+                                    increaseMoney(gain)
                                     print("You decide to return up the coffin lid.")
                                     answer = input("Try and climb up it or try to shuffle?")
-                                    while answer.lower() != "climb" and answer.lower() != "shuffle":
-                                        print("Answer not recognised")
-                                        answer = input("Please try again: ")
                                     if answer.lower() == "climb":
                                         print("There is no rope, so you must shuffle!")
                                         print(
                                             "You take a while to shuffle up, and decide that next time you will place a rope there to make it easier")
                                         print("You make your way out of the cave.")
                                         answer = input("continue to next cave?")
-                                        while answer.lower() != "yes" and answer.lower() != "no":
-                                            print("Answer not recognised")
-                                            answer = input("Please try again: ")
                                         if answer.lower() == "yes":
                                             if "goatchurch" in caves:
                                                 gain = 100
@@ -198,9 +305,6 @@ def goatchurch():
                                         print("You take a few minutes to shuffle up, but it is far quicker than climbing!")
                                         print("You make your way out of the cave.")
                                         answer = input("continue to next cave?")
-                                        while answer.lower() != "yes" and answer.lower() != "no":
-                                            print("Answer not recognised")
-                                            answer = input("Please try again: ")
                                         if answer.lower() == "yes":
                                             if "goatchurch" in caves:
                                                 gain = 100
@@ -231,18 +335,12 @@ def goatchurch():
                                     increaseMoney(gain)
                                     print("You decide to return up the coffin lid.")
                                     answer = input("Try and climb up it or try to shuffle?")
-                                    while answer.lower() != "forwards" and answer.lower() != "backwards":
-                                        print("Answer not recognised")
-                                        answer = input("Please try again: ")
                                     if answer.lower() == "climb":
                                         print("There is no rope, so you must shuffle!")
                                         print(
                                             "You take a while to shuffle up, and decide that next time you will place a rope there to make it easier")
                                         print("You make your way out of the cave.")
                                         answer = input("continue to next cave?")
-                                        while answer.lower() != "yes" and answer.lower() != "no":
-                                            print("Answer not recognised")
-                                            answer = input("Please try again: ")
                                         if answer.lower() == "yes":
                                             if "goatchurch" in caves:
                                                 gain = 100
@@ -272,9 +370,6 @@ def goatchurch():
                                             "You take a few minutes to shuffle up, but it is far quicker than climbing!")
                                         print("You make your way out of the cave.")
                                         answer = input("continue to next cave?")
-                                        while answer.lower() != "yes" and answer.lower() != "no":
-                                            print("Answer not recognised")
-                                            answer = input("Please try again: ")
                                         if answer.lower() == "yes":
                                             if "goatchurch" in caves:
                                                 gain = 100
@@ -335,9 +430,49 @@ def goatchurch():
             bigMenu()
 
     else:
-        print("I'm sorry, but that feature is under development.")
-        save()
-        time.sleep(3)
+        dev = input("I'm sorry, but that feature is under development. Press enter to return to main menu.")
+        if dev != "hack club is amazing!":
+            save()
+            bigMenu()
+        print("New entrance it is.")
+        print("There is a short drop here.")
+        if "rope" in inventory:
+            answer = input("Rig a rope?")
+            if answer.lower() != "yes":
+                print("It hurts like hell. You have to be rushed out! You gained 2 injuries.")
+                injuries += 2
+                answer = input("Spend 20$ to visit the doctor and heal one injury [Y/n]?")
+                if answer.lower() == "n":
+                    print(f"You have {injuries} injuries. If you gain more than 5 injuries you will either have to visit the doctor or retire.")
+                else:
+                    doctor()
+                time.sleep(2)
+                save()
+                bigMenu()
+            else:
+                print("You encounter a slide like structure.")
+                answer = input("Slide down on your front or on your back? ")
+                while answer.lower() != "front" and answer.lower() != "back":
+                    answer = input("I can't seem to recognise that answer. Please check for typos and leading or trailing spaces.")
+                if answer.lower() == "front":
+                    print("It is a little painful but you should be ok?")
+                    injuries += 1
+                    answer = input("Spend 20$ to visit the doctor [Y/n]?")
+                    if answer.lower() == "n":
+                        print(f"You have {injuries} injuries. If you gain more than 5 injuries you will either have to visit the doctor or retire.")
+                    else:
+                        doctor()
+                else:
+                    print("You make it down with no injury.")
+                bigMenu()
+                
+        else:
+            print("It is too dangerous without a rope. You have to return.")
+            time.sleep(4)
+            save()
+            bigMenu()
+
+
 
 
 def swildons():
